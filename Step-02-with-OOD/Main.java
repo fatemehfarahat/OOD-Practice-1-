@@ -11,11 +11,16 @@ public class Main {
         Customer customer = new Customer("Ali", "ali@example.com","09124483765", "Paris");
         Room room = new LuxuryRoom("203", 150);
         Reservation res = new Reservation(room, customer, 2);
-
-        ReservationService service = new ReservationService();
-
-        Payment payment = new Paypal();
-
-        service.makeReservation(res, payment, Notifier.EMAIL);
+        Payment paymentService = new Paypal(); 
+        MessageSender messageService = new EmailSender(); 
+        Discount discount = new ParisDiscount(); 
+        Invoice invoiceService = new Invoice(); 
+        ReservationService service = new ReservationService(
+            paymentService, 
+            messageService, 
+            discount, 
+            invoiceService
+        );
+        service.makeReservation(res);
     }
 }

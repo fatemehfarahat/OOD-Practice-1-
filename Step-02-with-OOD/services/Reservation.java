@@ -16,4 +16,11 @@ public class Reservation {
     public double totalPrice(){
         return room.price * nights;
     }
+    public void setFinalPrice(double finalPrice) {
+        this.finalPrice = finalPrice;
+    }
+
+    public double getFinalPrice() {
+        return finalPrice;
+    }
 }
