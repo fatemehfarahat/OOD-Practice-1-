@@ -13,6 +13,9 @@ public class Main {
         Reservation res = new Reservation(room, customer, 2);
 
         ReservationService service = new ReservationService();
-        service.makeReservation(res, PaymentMethods.PAYPAL, Notifier.EMAIL);
+
+        Payment payment = new Paypal();
+
+        service.makeReservation(res, payment, Notifier.EMAIL);
     }
 }
