@@ -217,3 +217,62 @@
   </tr>
 </tbody>
 </table>
+
+
+
+
+<h2><b>گام چهارم: (ارزیابی)</b></h2>
+
+<h3>قابلیت پرداخت حضوری:</h3>
+
+<table>
+  <tr>
+    <th>قبل تغییر</th>
+    <th>بعد تغییر</th>
+  </tr>
+  <tr>
+    <td>اضافه کردن متد on Site Payment در کلاس <b>PaymentProcessor</b></td>
+    <td>اضافه کردن کلاس <b>OnSitePayment</b></td>
+  </tr>
+  <tr>
+    <td>افزودن case به دستور switch برای پرداخت حضوری در کلاس <b>ReservationService</b></td>
+    <td></td>
+  </tr>
+</table>
+
+
+<h3>قابلیت ارسال پیام:</h3>
+
+<table>
+  <tr>
+    <th>قبل تغییر</th>
+    <th>بعد تغییر</th>
+  </tr>
+
+  <tr>
+    <td>افزودن تابع ارسال پیامک در کلاس <b>MessageSender</b></td>
+    <td>اضافه کردن کلاس <b>SmsSender</b></td>
+  </tr>
+
+  <tr>
+    <td>پیاده‌سازی متد جدید <b>sendSms</b> در کلاس جدید <b>SmsSender</b></td>
+    <td></td>
+  </tr>
+
+  <tr>
+    <td>افزودن کلاس <b>SmsSender</b> که واسط <b>MessageSender</b> را پیاده‌سازی می‌کند</td>
+    <td></td>
+  </tr>
+
+  <tr>
+    <td>
+      افزودن <b>case</b> جدید در switch و ایجاد شیء از <b>SmsSender</b> و فراخوانی
+      <b>sendSms</b> در کلاس <b>ReservationService</b>
+    </td>
+    <td></td>
+  </tr>
+
+</table>
+
+</div>
+
