@@ -173,3 +173,47 @@
 
 
 
+<h2><b>گام سوم: (اصلاح موارد نقض)</b></h2>
+
+
+<table dir="rtl">
+<thead>
+  <tr>
+    <th align="center">اصول</th>
+    <th align="center">نقص</th>
+    <th align="center">رفع نقص</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td align="center">SRP</td>
+    <td align="right"><div style="direction: rtl; text-align: right;">کلاس ReservationService مسئول ۴ حوزه (تخفیف، پرداخت، اعلان، جریان رزرو) بود. Payment processor انواع مختلف مسئولیت بر عهده دارد.</div></td>
+    <td align="right"><div style="direction: rtl; text-align: right;">منطق تخفیف به Discount و ParisDiscount منتقل شد. منطق پرداخت به اینترفیس Payment و کلاس‌های Paypal, Cash, Card منتقل شد. منطق اعلان به کلاس‌های مجزای MessageSender و EmailSender منتقل شد.</div></td>
+  </tr>
+  <tr>
+    <td align="center">OCP</td>
+    <td align="right"><div style="direction: rtl; text-align: right;">برای افزودن پرداخت یا اعلان جدید، نیاز به اصلاح بلوک‌های switch در رزرویشن سرویس بود.</div></td>
+    <td align="right"><div style="direction: rtl; text-align: right;">رزرویشن سرویس به جای استفاده از switch، فقط متد پرداخت یا ارسال را روی اینترفیس‌های massege sender ,payment فراخوانی می‌کند.</div></td>
+  </tr>
+  <tr>
+    <td align="center">DIP</td>
+    <td align="right"><div style="direction: rtl; text-align: right;">رزرویشن سرویس به کلاس‌های سطح پایین وابسته بود: new PaymentProcessor(), new EmailSender().</div></td>
+    <td align="right"><div style="direction: rtl; text-align: right;">از اینترفیس‌ها (Payment, massege Sender, Discount) استفاده شد تا کلاس به متدهای کلاس‌های سطح پایین مثل payByCard یا sendEmail وابسته نباشد.</div></td>
+  </tr>
+  <tr>
+    <td align="center">ISP</td>
+    <td align="right"><div style="direction: rtl; text-align: right;">اینترفیس MessageSender.java دو متد نامرتبط داشت (sendEmail, sendSms).</div></td>
+    <td align="right"><div style="direction: rtl; text-align: right;">اینترفیس MessageSender.java اصلاح شد تا هر کلاینت فقط به متدهای مورد نیاز خود وابسته باشد و مجبور به اجرای متدهای غیرمرتبط نباشد.</div></td>
+  </tr>
+  <tr>
+    <td align="center">PLK</td>
+    <td align="right"><div style="direction: rtl; text-align: right;">دسترسی زنجیره‌ای به داده‌ها: res.customer.name, res.room.price.</div></td>
+    <td align="right"><div style="direction: rtl; text-align: right;">متدهای دسترسی تعریف شدند و ReservationService از این متدها برای دسترسی کپسوله ‌شده استفاده می‌کند.</div></td>
+  </tr>
+  <tr>
+    <td align="center">کپسوله‌سازی</td>
+    <td align="right"><div style="direction: rtl; text-align: right;">تغییر مستقیم قیمت اتاق.</div></td>
+    <td align="right"><div style="direction: rtl; text-align: right;">منطق تخفیف به ParisDiscount منتقل شد و عامل تخفیف را برمی‌گرداند. این عامل روی یک متغیر محلی (finalPrice) اعمال می‌شود و فیلد اصلی قیمت اتاق تغییر نمی‌کند.</div></td>
+  </tr>
+</tbody>
+</table>
